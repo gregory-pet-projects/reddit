@@ -1,4 +1,4 @@
-import PostBox from "@/components/PostBox";
+import PostBox from "@/components/PostBox/PostBox";
 import { NextPage } from "next";
 import Head from "next/head";
 
