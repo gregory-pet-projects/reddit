@@ -16,12 +16,14 @@ const PostBox = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
   const [imageBoxOpen, setImageBoxOpen] = useState<boolean>(false);
 
   const onSubmit = handleSubmit(async (formData) => {
     console.log("formData", formData);
+    reset();
   });
   return (
     <form
