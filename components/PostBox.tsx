@@ -1,15 +1,46 @@
 import { LinkIcon, PhotographIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { UseFormRegister, useForm } from "react-hook-form";
 import Avatar from "./Avatar";
 
 type FormData = {
   postTitle: string;
   postBody: string;
   postImage: string;
-  subeddit: string;
+  subreddit: string;
 };
+
+type InputProps = {
+  label: string;
+  register: UseFormRegister<FormData>;
+  name: "postTitle" | "postBody" | "postImage" | "subreddit";
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+};
+
+const Input = ({
+  label,
+  register,
+  name,
+  type = "text",
+  placeholder,
+  required = false,
+}: InputProps) => {
+  return (
+    <div className="flex items-center px-2">
+      <p className="min-w-[90px]">{label}:</p>
+      <input
+        {...(register(name), { required })}
+        className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md "
+        type={type}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+};
+
 const PostBox = () => {
   const { data: session } = useSession();
   const {
@@ -25,9 +56,10 @@ const PostBox = () => {
     console.log("formData", formData);
     reset();
   });
+  console.log("imageBoxOpen", imageBoxOpen);
   return (
     <form
-      className="sticky top-16 z-50 border border-rounded bg-white border-gray-300 p-2"
+      className="sticky top-16 z-50 border rounded bg-white border-gray-300 p-2"
       onSubmit={onSubmit}
     >
       <div className="flex items-center space-x-3">
@@ -44,8 +76,8 @@ const PostBox = () => {
 
         <PhotographIcon
           onClick={() => setImageBoxOpen(!imageBoxOpen)}
-          className={`h-6 text-gray-300 cursor-pointer hover:text-gray-400 ${
-            imageBoxOpen && "text-blue-300"
+          className={`h-6  cursor-pointer hover:text-gray-400 ${
+            imageBoxOpen ? "text-blue-300" : "text-gray-300"
           }`}
         />
         <LinkIcon className="h-6 text-gray-300 cursor-pointer hover:text-gray-400" />
@@ -66,7 +98,7 @@ const PostBox = () => {
             <p className="min-w-[90px]">Subreddit:</p>
             <input
               className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md "
-              {...register("subeddit", { required: true })}
+              {...register("subreddit", { required: true })}
               type="text"
               placeholder="i.e r/AskReddit"
             />
@@ -85,22 +117,18 @@ const PostBox = () => {
 
           {Object.keys(errors).length > 0 && (
             <div className="space-y-2 p-2 text-red-500">
-              {errors?.postTitle?.type === "required" && (
-                <p className="">- A post Title is required</p>
-              )}
-              {errors?.subeddit?.type === "required" && (
+              {errors?.subreddit?.type === "required" && (
                 <p className="">- A Subreddit is required</p>
               )}
             </div>
           )}
-          {!!watch("postTitle") && (
-            <button
-              type="submit"
-              className="w-full rounded-full bg-blue-400 p-2 text-white"
-            >
-              Create Post
-            </button>
-          )}
+
+          <button
+            type="submit"
+            className="w-full rounded-full bg-blue-400 p-2 text-white"
+          >
+            Create Post
+          </button>
         </div>
       )}
     </form>
