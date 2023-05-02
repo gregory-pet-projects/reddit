@@ -9,7 +9,7 @@ interface Props {
 }
 export const SignButton: FC<Props> = ({ onClick, signOut, userName }) => (
   <div
-    onClick={() => onClick()}
+    onClick={onClick}
     className="hidden lg:flex items-center space-x-2 rounded-sm border border-gray-100 p-2 cursor-pointer lg:hover:bg-gray-200"
   >
     <div className="relative h-5 w-5 flex-shrink-0">
