@@ -57,7 +57,12 @@ const Header = () => {
         {icons.map(({ Icon }, idx) => (
           <>
             <Icon key={idx} className="icon" />
-            {idx === 2 && <hr className="h-10 border border-gray-100" />}
+            {idx === 2 && (
+              <hr
+                key={`divider-${idx}`}
+                className="h-10 border border-gray-100"
+              />
+            )}
           </>
         ))}
       </div>
