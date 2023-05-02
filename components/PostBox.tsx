@@ -1,7 +1,7 @@
 import { LinkIcon, PhotographIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { UseFormRegister, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Avatar from "./Avatar";
 
 type FormData = {
@@ -9,36 +9,6 @@ type FormData = {
   postBody: string;
   postImage: string;
   subreddit: string;
-};
-
-type InputProps = {
-  label: string;
-  register: UseFormRegister<FormData>;
-  name: "postTitle" | "postBody" | "postImage" | "subreddit";
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-};
-
-const Input = ({
-  label,
-  register,
-  name,
-  type = "text",
-  placeholder,
-  required = false,
-}: InputProps) => {
-  return (
-    <div className="flex items-center px-2">
-      <p className="min-w-[90px]">{label}:</p>
-      <input
-        {...(register(name), { required })}
-        className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md "
-        type={type}
-        placeholder={placeholder}
-      />
-    </div>
-  );
 };
 
 const PostBox = () => {
@@ -56,7 +26,7 @@ const PostBox = () => {
     console.log("formData", formData);
     reset();
   });
-  console.log("imageBoxOpen", imageBoxOpen);
+
   return (
     <form
       className="sticky top-16 z-50 border rounded bg-white border-gray-300 p-2"
