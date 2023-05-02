@@ -4,7 +4,7 @@ import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="max-w-5xl my-7 mx-auto">
       <Head>
         <title>Reddit Home Page</title>
         <link rel="icon" href="/favicon.ico"></link>
