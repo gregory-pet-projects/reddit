@@ -13,7 +13,9 @@ import {
   MenuIcon,
   SearchIcon,
 } from "@heroicons/react/solid";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { SignButton } from "./SignButton";
 
 const icons = [
   { Icon: SparklesIcon, onClick: () => undefined },
@@ -24,7 +26,9 @@ const icons = [
   { Icon: PlusIcon, onClick: () => undefined },
   { Icon: SpeakerphoneIcon, onClick: () => undefined },
 ];
+
 const Header = () => {
+  const { data: session } = useSession();
   return (
     <div className="flex bg-white px-4 py-2 shadow-sm sticky-top-0 z-50">
       <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
@@ -60,17 +64,11 @@ const Header = () => {
       <div className="ml-5 flex items-center lg:hidden">
         <MenuIcon className="icon" />
       </div>
-      <div className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
-        <div className="relative h-5 w-5 flex-shrink-0">
-          <Image
-            src="https://links.papareact.com/23l"
-            alt="signin"
-            fill
-            style={{ objectFit: "contain" }}
-          />
-        </div>
-        <p className="text-gray-400">Sign In</p>
-      </div>
+      <SignButton
+        onClick={session ? signOut : signIn}
+        signOut={!!session}
+        userName={session?.user?.name || "@User"}
+      />
     </div>
   );
 };
