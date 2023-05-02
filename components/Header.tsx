@@ -36,7 +36,7 @@ const Header = () => {
           src="https://logodownload.org/wp-content/uploads/2018/02/reddit-logo.png"
           alt="logo"
           fill
-          style={{ objectFit: "contain", top: "5px" }}
+          style={{ objectFit: "contain" }}
         />
       </div>
       <div className="flex items-center mx-7 xl:min-w-[300px]">
