@@ -172,7 +172,6 @@ type Mutation {
   insertPost(
     body: String
     subreddit_id: ID
-    created_at: DateTime
     title: String
     username: String
     image: String
