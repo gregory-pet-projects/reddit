@@ -1,12 +1,18 @@
-import { GET_ALL_POSTS } from "@/graphql/queries";
+import { GET_ALL_POSTS, GET_ALL_POSTS_BY_TOPIC } from "@/graphql/queries";
 import { useQuery } from "@apollo/client";
+import { FC } from "react";
 import Post from "./Post";
 
-const Feed = () => {
-  const { data, loading } = useQuery(GET_ALL_POSTS);
+interface Props {
+  topic?: string;
+}
+const Feed: FC<Props> = ({ topic }) => {
+  const { data, loading } = useQuery(
+    topic ? GET_ALL_POSTS_BY_TOPIC : GET_ALL_POSTS,
+    { variables: { topic } }
+  );
 
-  const posts: Post[] = data?.postList;
-  console.log({ data, posts });
+  const posts: Post[] = data?.[topic ? "postListByTopic" : "postList"];
 
   if (loading) {
     return <p>Loading...</p>;
