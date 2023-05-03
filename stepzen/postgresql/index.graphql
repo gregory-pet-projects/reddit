@@ -174,7 +174,7 @@ type Query {
       configuration: "postgresql_config"
     )
 
-  voteListById(post_id: ID!): [vote]
+  voteListById(post_id: String!): [vote]
     @dbquery(
       type: "postgresql"
       query: """
@@ -206,7 +206,6 @@ type Mutation {
     post_id: ID!
     text: String!
     id: ID!
-    created_at: DateTime!
   ): comment
     @dbquery(
       type: "postgresql"
@@ -215,11 +214,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertComment(
-    username: String!
-    post_id: ID!
-    text: String!
-  ): comment
+  insertComment(username: String!, post_id: ID!, text: String!): comment
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -259,7 +254,7 @@ type Mutation {
       configuration: "postgresql_config"
     )
   " Mutations for type 'subreddit' "
-  deleteSubreddit(topic: String!, created_at: DateTime!, id: ID!): subreddit
+  deleteSubreddit(topic: String!, id: ID!): subreddit
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -267,7 +262,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertSubreddit(topic: String, created_at: DateTime): subreddit
+  insertSubreddit(topic: String): subreddit
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -276,13 +271,7 @@ type Mutation {
       configuration: "postgresql_config"
     )
   " Mutations for type 'vote' "
-  deleteVote(
-    username: String!
-    post_id: ID!
-    id: ID!
-    created_at: DateTime!
-    upvote: Boolean!
-  ): vote
+  deleteVote(username: String!, post_id: ID!, id: ID!, upvote: Boolean!): vote
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -290,12 +279,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertVote(
-    username: String
-    post_id: ID
-    created_at: DateTime
-    upvote: Boolean
-  ): vote
+  insertVote(username: String!, post_id: ID!, upvote: Boolean!): vote
     @dbquery(
       type: "postgresql"
       schema: "public"
