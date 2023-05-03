@@ -2,7 +2,7 @@ import { LinkIcon, PhotographIcon } from "@heroicons/react/outline";
 
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import Avatar from "../Avatar";
 import { postBoxHook } from "./hook";
@@ -21,7 +21,11 @@ const defaultValues: FormData = {
   subreddit: "",
 };
 
-const PostBox = () => {
+interface Props {
+  subreddit?: string;
+}
+
+const PostBox: FC<Props> = ({ subreddit }) => {
   const session = useSession()?.data as Session;
   const {
     register,
@@ -33,8 +37,7 @@ const PostBox = () => {
     defaultValues,
   });
   const [imageBoxOpen, setImageBoxOpen] = useState<boolean>(false);
-  const { onSubmit } = postBoxHook({ reset, session, handleSubmit });
-
+  const { onSubmit } = postBoxHook({ reset, session, handleSubmit, subreddit });
   return (
     <form
       className="sticky top-16 z-50 border rounded bg-white border-gray-300 p-2"
@@ -48,7 +51,11 @@ const PostBox = () => {
           type="text"
           disabled={!session}
           placeholder={
-            session ? "Create a post by entering a title" : "Sign in to post"
+            session
+              ? subreddit
+                ? `Create a post in r/${subreddit}`
+                : "Create a post by entering a title"
+              : "Sign in to post"
           }
         />
 
@@ -72,15 +79,18 @@ const PostBox = () => {
             />
           </div>
 
-          <div className="flex items-center px-2">
-            <p className="min-w-[90px]">Subreddit:</p>
-            <input
-              className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md "
-              {...register("subreddit", { required: true })}
-              type="text"
-              placeholder="i.e r/AskReddit"
-            />
-          </div>
+          {!subreddit && (
+            <div className="flex items-center px-2">
+              <p className="min-w-[90px]">Subreddit:</p>
+              <input
+                className="m-2 flex-1 bg-blue-50 p-2 outline-none rounded-md "
+                {...register("subreddit", { required: true })}
+                type="text"
+                placeholder="i.e r/AskReddit"
+              />
+            </div>
+          )}
+
           {imageBoxOpen && (
             <div className="flex items-center px-2">
               <p className="min-w-[90px]">Image URL:</p>

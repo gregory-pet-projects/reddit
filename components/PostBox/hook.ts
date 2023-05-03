@@ -10,8 +10,14 @@ interface Props {
   reset: () => void;
   session: Session;
   handleSubmit: any;
+  subreddit?: string;
 }
-export const postBoxHook = ({ reset, session, handleSubmit }: Props) => {
+export const postBoxHook = ({
+  reset,
+  session,
+  handleSubmit,
+  subreddit,
+}: Props) => {
   const [addPost] = useMutation(ADD_POST, {
     refetchQueries: [GET_ALL_POSTS, "postList"],
   });
@@ -23,7 +29,7 @@ export const postBoxHook = ({ reset, session, handleSubmit }: Props) => {
     } = await client.query({
       query: GET_SUBREDDIT_BY_TOPIC,
       variables: {
-        topic: formData.subreddit,
+        topic: subreddit || formData.subreddit,
       },
     });
     return subredditListByTopic;

@@ -33,8 +33,7 @@ const Post: FC<Props> = ({ post }) => {
               r/{post.subreddit[0]?.topic}
             </span>
             • Posted by u/
-            {post.username}
-            <ReactTimeago date={post.created_at} />
+            {post.username} <ReactTimeago date={post.created_at} />
           </p>
         </div>
         {/* Body */}
