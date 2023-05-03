@@ -15,7 +15,7 @@ const Feed: FC<Props> = ({ topic }) => {
 
   const posts: Post[] = data?.[topic ? "postListByTopic" : "postList"];
 
-  if (true) {
+  if (loading) {
     return <Loading />;
   }
   return (
