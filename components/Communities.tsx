@@ -7,6 +7,9 @@ const Communities = () => {
     variables: { limit: 10 },
   });
   const subreddits: Subreddit[] = data?.subredditListLimit;
+  if (subreddits.length === 0) {
+    return null;
+  }
 
   return (
     <div className="sticky top-36 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border border-gray-300 bg-white lg:inline">
