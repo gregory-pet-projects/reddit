@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface Props {
-  seed: string | null | undefined;
+  seed: String | null | undefined;
   large?: boolean;
 }
 const Avatar: FC<Props> = ({ seed, large }) => (

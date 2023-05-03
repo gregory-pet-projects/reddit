@@ -30,7 +30,7 @@ const icons = [
 const Header = () => {
   const { data: session } = useSession();
   return (
-    <div className="flex bg-white px-4 py-2 shadow-sm sticky-top-0 z-50">
+    <div className="flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50">
       <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
         <Image
           src="https://logodownload.org/wp-content/uploads/2018/02/reddit-logo.png"

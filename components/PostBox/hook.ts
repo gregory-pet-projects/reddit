@@ -1,6 +1,6 @@
 import client from "@/apollo-client";
 import { ADD_POST, ADD_SUBREDDIT } from "@/graphql/mutations";
-import { GET_SUBREDDIT_BY_TOPIC } from "@/graphql/queries";
+import { GET_ALL_POSTS, GET_SUBREDDIT_BY_TOPIC } from "@/graphql/queries";
 import { useMutation } from "@apollo/client";
 import { Session } from "next-auth";
 import toast from "react-hot-toast";
@@ -12,7 +12,9 @@ interface Props {
   handleSubmit: any;
 }
 export const postBoxHook = ({ reset, session, handleSubmit }: Props) => {
-  const [addPost] = useMutation(ADD_POST);
+  const [addPost] = useMutation(ADD_POST, {
+    refetchQueries: [GET_ALL_POSTS, "postList"],
+  });
   const [addSubreddit] = useMutation(ADD_SUBREDDIT);
 
   const getQuerySubredditTopic = async (formData: FormData) => {
