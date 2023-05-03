@@ -59,7 +59,6 @@ const Post: FC<Props> = ({ post }) => {
     const vote = votes?.find(
       (vote) => vote.username === session?.user?.name
     )?.upvote;
-    console.log("vote===>", vote);
     if (vote !== undefined) {
       setVote(vote as boolean);
     }
