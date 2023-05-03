@@ -1,3 +1,4 @@
+import Communities from "@/components/Communities";
 import Feed from "@/components/Feed";
 import PostBox from "@/components/PostBox/PostBox";
 import { NextPage } from "next";
@@ -7,12 +8,13 @@ const Home: NextPage = () => {
   return (
     <div className="max-w-5xl my-7 mx-auto">
       <Head>
-        <title>Reddit Home Page</title>
+        <title>Reddit 2.0</title>
         <link rel="icon" href="/favicon.ico"></link>
       </Head>
       <PostBox />
-      <div className="flex ">
+      <div className="flex">
         <Feed />
+        <Communities />
       </div>
     </div>
   );
