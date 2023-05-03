@@ -100,7 +100,7 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-    postListByTopic(topic:String!): [post]
+  postListByTopic(topic: String!): [post]
     @dbquery(
       type: "postgresql"
       query: """
@@ -108,6 +108,16 @@ type Query {
       join subreddit on subreddit.id = post.subreddit_id
       where subreddit.topic = $1
       order by post.created_at desc
+      """
+      configuration: "postgresql_config"
+    )
+
+  postById(post_id: String!): post
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from post
+      where post.id = $1
       """
       configuration: "postgresql_config"
     )

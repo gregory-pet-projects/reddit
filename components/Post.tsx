@@ -11,12 +11,16 @@ import Link from "next/link";
 import { FC } from "react";
 import ReactTimeago from "react-timeago";
 import Avatar from "./Avatar";
+import Loading from "./Loading";
 
 interface Props {
   post: Post;
 }
 
 const Post: FC<Props> = ({ post }) => {
+  if (!post) {
+    return <Loading />;
+  }
   return (
     <Link href={`post/${post.id}`}>
       <div className="flex cursor-pointer rounded-md border border-gray-300 bg-white shadow-sm hover:border hover:border-gray-600">
