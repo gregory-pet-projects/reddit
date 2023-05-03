@@ -13,6 +13,12 @@ The project is a Reddit clone application built using popular technologies. It a
 - React Hook Form
 - others...
 
+## Screenshots
+<div align="left">
+    <img src="https://firebasestorage.googleapis.com/v0/b/pet-projects-db.appspot.com/o/Portfolio%20previews%2Freddit%2FScreenshot%202023-05-03%20at%2021.05.13.png?alt=media&token=7e2f0428-6cab-480d-b94a-e6d7109fd089" width="400px"</img> 
+     <img src="https://firebasestorage.googleapis.com/v0/b/pet-projects-db.appspot.com/o/Portfolio%20previews%2Freddit%2FScreenshot%202023-05-03%20at%2021.05.39.png?alt=media&token=2039d867-c5bb-4d95-9045-e4dfe890e0b5" width="400px"</img> 
+</div>
+
 ## Getting Started
 
 ```bash
