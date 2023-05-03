@@ -1,5 +1,6 @@
 import { LinkIcon, PhotographIcon } from "@heroicons/react/outline";
 
+import { unavailableActionToast } from "@/utils/service";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import { FC, useState } from "react";
@@ -60,12 +61,15 @@ const PostBox: FC<Props> = ({ subreddit }) => {
         />
 
         <PhotographIcon
-          onClick={() => setImageBoxOpen(!imageBoxOpen)}
+          onClick={() => session && setImageBoxOpen(!imageBoxOpen)}
           className={`h-6  cursor-pointer hover:text-gray-400 ${
             imageBoxOpen ? "text-blue-300" : "text-gray-300"
           }`}
         />
-        <LinkIcon className="h-6 text-gray-300 cursor-pointer hover:text-gray-400" />
+        <LinkIcon
+          className="h-6 text-gray-300 cursor-pointer hover:text-gray-400"
+          onClick={() => session && unavailableActionToast()}
+        />
       </div>
       {!!watch("postTitle") && (
         <div className="flex flex-col py-2">
