@@ -7,15 +7,28 @@ const Communities = () => {
     variables: { limit: 10 },
   });
   const subreddits: Subreddit[] = data?.subredditListLimit;
-  if (subreddits.length === 0) {
+  if (subreddits?.length === 0) {
     return null;
   }
+
+  const filteredSubredditsList = subreddits?.reduce(
+    (accumulator: Subreddit[], current: Subreddit) => {
+      let exists = accumulator.find((item: Subreddit) => {
+        return item.topic === current.topic;
+      });
+      if (!exists) {
+        accumulator = accumulator.concat(current);
+      }
+      return accumulator;
+    },
+    []
+  );
 
   return (
     <div className="sticky top-36 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border border-gray-300 bg-white lg:inline">
       <p className="text-md mb-1 p-4 pb-3 font-bold">Top Communities</p>
       <div>
-        {subreddits?.map(({ id, topic }, idx) => (
+        {filteredSubredditsList?.map(({ id, topic }, idx) => (
           <SubredditRow key={id} idx={idx} topic={topic as string} />
         ))}
       </div>
