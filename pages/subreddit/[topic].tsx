@@ -23,8 +23,8 @@ const SubredditPage = () => {
         </div>
       </div>
       <div className="mx-auto max-w-5xl mt-5 px-10">
-        <PostBox />
-        <Feed />
+        <PostBox subreddit={topic as string} />
+        <Feed topic={topic as string} />
       </div>
     </div>
   );
