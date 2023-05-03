@@ -18,7 +18,7 @@ const Feed: FC<Props> = ({ topic }) => {
     return <p>Loading...</p>;
   }
   return (
-    <div className="mt-5 space-y-4">
+    <div className="flex flex-col mt-5 space-y-4">
       {posts?.map((post) => (
         <Post key={post.id} post={post} />
       ))}
