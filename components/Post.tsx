@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/outline";
 
 import { ADD_VOTE } from "@/graphql/mutations";
+import { unavailableActionToast } from "@/utils/service";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
@@ -29,7 +30,8 @@ const Post: FC<Props> = ({ post }) => {
   const { data, loading, error } = useQuery(GET_ALL_QUOTES_BY_POST_ID, {
     variables: { post_id: post.id },
   });
-  console.log("data==>", data, post.id);
+  const votes: Vote[] = data?.voteListById;
+
   const [addVote] = useMutation(ADD_VOTE, {
     refetchQueries: [GET_ALL_QUOTES_BY_POST_ID, "voteListById"],
   });
@@ -54,7 +56,6 @@ const Post: FC<Props> = ({ post }) => {
   };
 
   useEffect(() => {
-    const votes: Vote[] = data?.voteListById;
     const vote = votes?.find(
       (vote) => vote.username === session?.user?.name
     )?.upvote;
@@ -63,6 +64,14 @@ const Post: FC<Props> = ({ post }) => {
       setVote(vote as boolean);
     }
   }, [data]);
+
+  const displayVotes = (votes: Vote[]) => {
+    const displayNumber = votes?.reduce((total, vote) => {
+      return vote.upvote ? total + 1 : total - 1;
+    }, 0);
+    return displayNumber;
+  };
+
   if (!post) {
     return <Loading />;
   }
@@ -73,7 +82,7 @@ const Post: FC<Props> = ({ post }) => {
           onClick={() => upVote(true)}
           className={`voteButton hover:text-red-400 ${vote && "text-red-400"}`}
         />
-        <p className="text-black font-bold text-xs">0</p>
+        <p className="text-black font-bold text-xs">{displayVotes(votes)}</p>
         <ArrowDownIcon
           onClick={() => upVote(false)}
           className={`voteButton hover:text-blue-400 ${
@@ -118,22 +127,22 @@ const Post: FC<Props> = ({ post }) => {
             <p className="">{post.comments.length} Comments</p>
           </div>
 
-          <div className="postButtons">
+          <div className="postButtons" onClick={unavailableActionToast}>
             <GiftIcon className="h-6 w-6" />
             <p className="hidden sm:inline">Award</p>
           </div>
 
-          <div className="postButtons">
+          <div className="postButtons" onClick={unavailableActionToast}>
             <ShareIcon className="h-6 w-6" />
             <p className="hidden sm:inline">Share</p>
           </div>
 
-          <div className="postButtons">
+          <div className="postButtons" onClick={unavailableActionToast}>
             <BookmarkIcon className="h-6 w-6" />
             <p className="hidden sm:inline">Save</p>
           </div>
 
-          <div className="postButtons">
+          <div className="postButtons" onClick={unavailableActionToast}>
             <DotsHorizontalIcon className="h-6 w-6" />
           </div>
         </div>

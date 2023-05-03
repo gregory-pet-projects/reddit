@@ -1,3 +1,4 @@
+import { unavailableActionToast } from "@/utils/service";
 import {
   BellIcon,
   ChatIcon,
@@ -42,7 +43,10 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className="flex items-center mx-7 xl:min-w-[300px]">
+      <div
+        className="flex items-center mx-7 xl:min-w-[300px] cursor-pointer"
+        onClick={unavailableActionToast}
+      >
         <HomeIcon className="h-5 w-5" />
         <p className="flex-1 ml-2 hidden lg:inline">Home</p>
         <ChevronDownIcon className="h-5 w-5" />
@@ -59,7 +63,7 @@ const Header = () => {
       <div className="text-gray-500 space-x-2 mx-5 items-center hidden lg:inline-flex">
         {icons.map(({ Icon }, idx) => (
           <>
-            <Icon key={idx} className="icon" />
+            <Icon key={idx} className="icon" onClick={unavailableActionToast} />
             {idx === 2 && (
               <hr
                 key={`divider-${idx}`}
