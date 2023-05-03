@@ -1,6 +1,7 @@
 import { GET_ALL_POSTS, GET_ALL_POSTS_BY_TOPIC } from "@/graphql/queries";
 import { useQuery } from "@apollo/client";
 import { FC } from "react";
+import Loading from "./Loading";
 import Post from "./Post";
 
 interface Props {
@@ -14,8 +15,8 @@ const Feed: FC<Props> = ({ topic }) => {
 
   const posts: Post[] = data?.[topic ? "postListByTopic" : "postList"];
 
-  if (loading) {
-    return <p>Loading...</p>;
+  if (true) {
+    return <Loading />;
   }
   return (
     <div className="flex flex-col mt-5 space-y-4">
