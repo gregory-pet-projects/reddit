@@ -33,7 +33,7 @@ const Header = () => {
   const { data: session } = useSession();
   return (
     <div className="flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50 items-center">
-      <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
+      <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer md:mx-0 mr-4">
         <Link href="/">
           <Image
             src="https://logodownload.org/wp-content/uploads/2018/02/reddit-logo.png"
@@ -44,7 +44,7 @@ const Header = () => {
         </Link>
       </div>
       <div
-        className="flex items-center mx-7 xl:min-w-[300px] cursor-pointer"
+        className="items-center mx-7 xl:min-w-[300px] cursor-pointer hidden md:flex"
         onClick={unavailableActionToast}
       >
         <HomeIcon className="h-5 w-5" />

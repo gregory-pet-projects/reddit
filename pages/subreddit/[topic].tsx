@@ -8,8 +8,8 @@ const SubredditPage = () => {
     query: { topic },
   } = useRouter();
   return (
-    <div className={`h-24 bg-red-400 p-8`}>
-      <div className="-mx-8 mt-10 bg-white">
+    <div className={`h-24 bg-red-400 py-8`}>
+      <div className="-mx-8 mt-10 bg-white px-10">
         <div className="mx-auto flex max-w-5xl items-center space-x-4 pb-3">
           <div className="-mt-5">
             <Avatar seed={topic as string} large />
@@ -22,7 +22,7 @@ const SubredditPage = () => {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-5xl mt-5 px-10">
+      <div className="mx-auto w-screen sm:max-w-5xl mt-5 sm:px-10">
         <PostBox subreddit={topic as string} />
         <Feed topic={topic as string} />
       </div>

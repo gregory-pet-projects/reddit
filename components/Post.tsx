@@ -124,7 +124,10 @@ const Post: FC<Props> = ({ post }) => {
         <div className="flex space-x-4 text-gray-400">
           <div className="postButtons">
             <ChatAltIcon className="h-6 w-6" />
-            <p className="">{post.comments.length} Comments</p>
+            <p className="">
+              {post.comments.length}{" "}
+              <span className="hidden sm:inline">Comments</span>
+            </p>
           </div>
 
           <div className="postButtons" onClick={unavailableActionToast}>
