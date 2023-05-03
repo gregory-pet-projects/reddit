@@ -6,7 +6,7 @@ type Vote = {
   created_at: DateTime;
 };
 
-type Comment = {
+type CommentI = {
   username: String;
   text: String;
   post_id: ID;
@@ -29,6 +29,6 @@ type Post = {
   created_at: DateTime;
   body: String;
   votes: Vote[];
-  comments: Comment[];
+  comments: CommentI[];
   subreddit: Subreddit[];
 };

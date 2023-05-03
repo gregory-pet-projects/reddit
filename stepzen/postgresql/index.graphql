@@ -216,10 +216,9 @@ type Mutation {
       configuration: "postgresql_config"
     )
   insertComment(
-    username: String
-    post_id: ID
-    text: String
-    created_at: DateTime
+    username: String!
+    post_id: ID!
+    text: String!
   ): comment
     @dbquery(
       type: "postgresql"
