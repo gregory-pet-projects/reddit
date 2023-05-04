@@ -7,6 +7,7 @@ const nextConfig = {
       "logodownload.org",
       "api.dicebear.com",
       "cdn.pixabay.com",
+      "media.istockphoto.com",
     ],
   },
 };

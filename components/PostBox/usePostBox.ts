@@ -12,7 +12,7 @@ interface Props {
   handleSubmit: any;
   subreddit?: string;
 }
-export const postBoxHook = ({
+export const usePostBox = ({
   reset,
   session,
   handleSubmit,

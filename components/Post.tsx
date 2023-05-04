@@ -62,7 +62,8 @@ const Post: FC<Props> = ({ post }) => {
     if (vote !== undefined) {
       setVote(vote as boolean);
     }
-  }, [data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, votes]);
 
   const displayVotes = (votes: Vote[]) => {
     const displayNumber = votes?.reduce((total, vote) => {

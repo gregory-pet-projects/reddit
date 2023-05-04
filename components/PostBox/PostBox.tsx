@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import Avatar from "../Avatar";
-import { postBoxHook } from "./hook";
+import { usePostBox } from "./usePostBox";
 
 export interface FormData {
   postTitle: string;
@@ -38,7 +38,7 @@ const PostBox: FC<Props> = ({ subreddit }) => {
     defaultValues,
   });
   const [imageBoxOpen, setImageBoxOpen] = useState<boolean>(false);
-  const { onSubmit } = postBoxHook({ reset, session, handleSubmit, subreddit });
+  const { onSubmit } = usePostBox({ reset, session, handleSubmit, subreddit });
   return (
     <form
       className="sticky top-16 z-50 border rounded bg-white border-gray-300 p-2"
